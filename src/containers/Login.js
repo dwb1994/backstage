@@ -1,36 +1,41 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { notifacation } from 'antd'
-import UserLogin from 'src/components/user/UserLogin'
+import LoginTest from '../components/user/LoginTest'
+import { login } from '../reducer/modules/user';
+import { Button } from 'antd'
+// import UserLogin from '../components/user/UserLogin'
 
-require('src/css/login.scss')
+// require('../css/login.scss')
 
 class Login extends Component {
 
-  componentDidMount () {
-
-  }
-
-  componentWilReceiveProps (nextProps) {
-
+  handleClick = () => {
+    const login = this.props.login;
+    login(true);
   }
 
   render () {
+    console.log(this.props);
     return (
       <div>
-        <UserLogin/>
+        <LoginTest/>
+        <Button onClick={this.handleClick} >登录</Button>
       </div>
     )
   }
 }
 
 function mapStateToProps (state) {
-
+  console.log(state);
+  return {
+    loginState: state.user.isLogin
+  }
 }
 
 function mapDispatchToProps (dispatch) {
-
+  return {
+    login
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
